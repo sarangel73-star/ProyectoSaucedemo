@@ -5,23 +5,22 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import pages.InventoryPage;
 import pages.LoginPage;
 
-import java.time.Duration;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginTes {
-
-    private static final Duration REVIEW_PAUSE = Duration.ofSeconds(5);
+public class LoginTest {
 
     private WebDriver driver;
     private LoginPage loginPage;
 
     @BeforeEach
     void setUp() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+        driver = new ChromeDriver(options);
         loginPage = new LoginPage(driver);
         loginPage.open();
     }
@@ -29,13 +28,7 @@ public class LoginTes {
     @AfterEach
     void tearDown() {
         if (driver != null) {
-            try {
-                Thread.sleep(REVIEW_PAUSE.toMillis());
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            } finally {
-                driver.quit();
-            }
+            driver.quit();
         }
     }
 
