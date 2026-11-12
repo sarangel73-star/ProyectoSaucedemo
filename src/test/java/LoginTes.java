@@ -60,6 +60,12 @@ public class LoginTes {
         void performanceGlitchUserCanLogIn() {
             assertSuccessfulLogin("performance_glitch_user");
         }
+
+        // Comprueba que el usuario visual también accede al catálogo de productos.
+        @Test
+        void visualUserCanLogIn() {
+            assertSuccessfulLogin("visual_user");
+        }
     }
 
     @Nested
